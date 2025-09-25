@@ -1,0 +1,17 @@
+{
+  "name": "api-gan-proxy",
+  "version": "1.0.0",
+  "description": "Servidor proxy Oracle REST API",
+  "private": true,
+  "scripts": {
+    "start": "bun run main-modular.ts",
+    "standalone": "bun run standalone-launcher.ts",
+    "build:standalone": "bun build standalone-launcher.ts --compile --outfile ./dist/api-gan-proxy-standalone.exe"
+  },
+  "devDependencies": {
+    "@types/bun": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5"
+  }
+}
