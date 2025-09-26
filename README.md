@@ -12,6 +12,7 @@ Servidor proxy Oracle ↔ REST API
 - `--port <number>` - Puerto del servidor proxy
 - `--oracle-host <ip>` - IP del servidor Oracle
 - `--oracle-port <number>` - Puerto del servidor Oracle (opcional, default: 3011)
+- `--token <string>` - Token de autenticación (opcional, default: demo)
 - `--help` - Mostrar ayuda
 
 ## ENDPOINTS
@@ -27,6 +28,12 @@ Servidor proxy Oracle ↔ REST API
 
 # Uso básico con puerto Oracle por defecto
 .\dist\api-gan-proxy-standalone.exe --port 3000 --oracle-host 192.168.1.100
+
+# Con token personalizado
+.\dist\api-gan-proxy-standalone.exe --port 3000 --oracle-host 192.168.1.100 --token mi-token-secreto
+
+# Configuración completa
+.\dist\api-gan-proxy-standalone.exe --port 8080 --oracle-host 10.6.46.114 --oracle-port 8087 --token production-key
 ```
 
 ## DESARROLLO
@@ -41,3 +48,7 @@ bun run start
 # Compilar ejecutable
 bun run build:standalone
 ```
+
+### Para Desarrolladores
+
+📘 **[GUIA-DESARROLLADOR.md](GUIA-DESARROLLADOR.md)** - Guía completa para agregar nuevos endpoints

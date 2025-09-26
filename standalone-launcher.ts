@@ -9,7 +9,7 @@ function showHelp() {
 🚀 API GAN PROXY - Standalone v1.0
 
 USAGE:
-  api-gan-proxy-standalone --port <number> --oracle-host <ip> [--oracle-port <number>]
+  api-gan-proxy-standalone --port <number> --oracle-host <ip> [options]
 
 OPCIONES REQUERIDAS:
   --port <number>        - Puerto del servidor proxy
@@ -17,12 +17,14 @@ OPCIONES REQUERIDAS:
 
 OPCIONES OPCIONALES:
   --oracle-port <number> - Puerto del servidor Oracle (default: 3011)
+  --token <string>       - Token de autenticación (default: demo)
   --help, -h             - Mostrar esta ayuda
 
 EJEMPLOS:
   api-gan-proxy-standalone --port 3000 --oracle-host 192.168.1.100
   api-gan-proxy-standalone --port 8080 --oracle-host 10.6.46.114 --oracle-port 1521
-  api-gan-proxy-standalone --port 3000 --oracle-host 192.168.1.100 --oracle-port 8087
+  api-gan-proxy-standalone --port 3000 --oracle-host 192.168.1.100 --token mi-token-secreto
+  api-gan-proxy-standalone --port 3000 --oracle-host 192.168.1.100 --oracle-port 8087 --token production-key
 `);
 }
 
@@ -40,7 +42,7 @@ function parseArgs() {
 
   if (portIndex === -1 || hostIndex === -1) {
     console.error('❌ Argumentos requeridos faltantes');
-    console.error('Uso: api-gan-proxy-standalone --port <number> --oracle-host <ip> [--oracle-port <number>]');
+    console.error('Uso: api-gan-proxy-standalone --port <number> --oracle-host <ip> [--oracle-port <number>] [--token <string>]');
     console.error('Para ayuda: --help');
     process.exit(1);
   }
@@ -50,6 +52,8 @@ function parseArgs() {
   const hostArg = args[hostIndex + 1];
   const oraclePortIndex = args.findIndex(arg => arg === '--oracle-port');
   const oraclePortArg = oraclePortIndex !== -1 ? args[oraclePortIndex + 1] : '3011';
+  const tokenIndex = args.findIndex(arg => arg === '--token');
+  const tokenArg = tokenIndex !== -1 ? args[tokenIndex + 1] : 'demo';
 
   // Validar puerto
   const port = parseInt(portArg);
@@ -78,7 +82,7 @@ function parseArgs() {
       host: hostArg, 
       port: oraclePort, 
       endpoints: { inserts: "/exec", procedures: "/procedure" }, 
-      token: "demo" 
+      token: tokenArg 
     },
     logging: { enabled: true, directory: "logs" },
     cors: { enabled: true, origins: ["*"] }
@@ -95,7 +99,8 @@ async function main() {
   
   console.log(`🌐 Puerto proxy: ${config.proxy.port}`);
   console.log(`🎯 Oracle destino: ${config.oracle.host}:${config.oracle.port}`);
-  console.log(`📁 Logs: ${config.logging.directory}\n`);
+  console.log(`� Token: ${config.oracle.token}`);
+  console.log(`�📁 Logs: ${config.logging.directory}\n`);
 
   // Crear configuración temporal
   const tempConfig = JSON.stringify(config, null, 2);
