@@ -2,6 +2,28 @@
 
 Servidor proxy Oracle ↔ REST API
 
+## ¿QUÉ ES Y PARA QUÉ SIRVE?
+
+**API GAN PROXY** es un servidor proxy que actúa como puente de comunicación entre aplicaciones cliente y una API Oracle, proporcionando una interfaz REST simplificada para operaciones de base de datos.
+
+### 🎯 **Propósito Principal**
+- **Conversión de datos**: Transforma datos JSON en consultas SQL INSERT optimizadas para Oracle
+- **Ejecución de procedimientos**: Permite ejecutar procedimientos almacenados de Oracle de forma remota
+- **Proxy transparente**: Actúa como intermediario seguro entre el cliente y el servidor Oracle
+
+### 🔧 **Casos de Uso**
+- **Migración de datos**: Envío masivo de registros JSON que se convierten automáticamente en INSERTs
+- **Integración de sistemas**: Conectar aplicaciones web/mobile con bases de datos Oracle legacy
+- **Ejecución remota**: Llamar procedimientos almacenados Oracle desde aplicaciones externas
+- **API unificada**: Centralizar el acceso a múltiples operaciones Oracle bajo una sola interfaz REST
+
+### ⚡ **Características**
+- **Alto rendimiento**: Construido con Bun para máxima velocidad
+- **Logging detallado**: Trazabilidad completa de todas las operaciones
+- **Ejecutable standalone**: No requiere instalación de Node.js en producción
+- **Configuración flexible**: Parámetros personalizables por línea de comandos
+- **CORS habilitado**: Listo para aplicaciones web frontend
+
 ## USO
 
 ```bash
